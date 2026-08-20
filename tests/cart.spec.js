@@ -4,11 +4,11 @@ const test = playwright.test;
 const expect = playwright.expect;
 
 const { LoginPage } = require('../pages/LoginPage');
-
+const { validUser } = require('../test-data/users');
 test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await page.goto('https://www.saucedemo.com/');
-    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.login(validUser.username, validUser.password);
     await expect(page).toHaveURL(/inventory/);
 });
 
